@@ -1,0 +1,132 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "teste",
+      "author": "typicode",
+      "id": 2
+    }
+  ],
+  "users": [
+    {
+      "name": "Gabriel Fernandes",
+      "email": "gabriel.fernandes@innovaconnect.com.br",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "roleId": "2",
+      "enabled": true,
+      "role": {
+        "id": 2,
+        "reference": "COMMERCIAL",
+        "name": "Comercial",
+        "enabled": true
+      },
+      "createdAt": "2021-07-13T15:03:20.514Z",
+      "updatedAt": "2021-07-13T15:03:20.514Z",
+      "id": 7
+    },
+    {
+      "name": "12345678",
+      "email": "12345678@12345678",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "roleId": "2",
+      "enabled": true,
+      "role": {
+        "id": 2,
+        "reference": "COMMERCIAL",
+        "name": "Comercial",
+        "enabled": true
+      },
+      "createdAt": "2021-07-13T20:30:26.984-03:00",
+      "updatedAt": "2021-07-13T20:30:26.984-03:00",
+      "id": 8
+    },
+    {
+      "name": "12345678",
+      "email": "12345678@12345678",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "roleId": "2",
+      "enabled": true,
+      "role": {
+        "id": 2,
+        "reference": "COMMERCIAL",
+        "name": "Comercial",
+        "enabled": true
+      },
+      "createdAt": "2021-07-13T20:34:26.696-03:00",
+      "updatedAt": "2021-07-13T20:34:26.696-03:00",
+      "id": 9
+    },
+    {
+      "name": "Teste",
+      "email": "teste@teste.com.br",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "roleId": "1",
+      "enabled": true,
+      "role": {
+        "id": 1,
+        "reference": "ADMINISTRATOR",
+        "name": "Administrator",
+        "enabled": true
+      },
+      "createdAt": "2021-08-08T17:16:42.967-03:00",
+      "updatedAt": "2021-08-08T17:16:42.967-03:00",
+      "id": 10
+    },
+    {
+      "name": "Teste gabriel",
+      "email": "gabrielfernandesfg@hotmail.com",
+      "password": "12345678",
+      "passwordConfirmation": "12345678",
+      "roleId": "1",
+      "enabled": true,
+      "role": {
+        "id": 1,
+        "reference": "ADMINISTRATOR",
+        "name": "Administrator",
+        "enabled": true
+      },
+      "createdAt": "2021-08-08T17:19:10.836-03:00",
+      "updatedAt": "2021-08-08T17:19:10.836-03:00",
+      "id": 11
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "user": {
+    "id": 1,
+    "name": "gabriel"
+  },
+  "roles": [
+    {
+      "id": 1,
+      "reference": "ADMINISTRATOR",
+      "name": "Administrator",
+      "enabled": true
+    },
+    {
+      "id": 2,
+      "reference": "COMMERCIAL",
+      "name": "Comercial",
+      "enabled": true
+    }
+  ],
+  "validate-token": {
+    "isValid": true
+  }
+}
