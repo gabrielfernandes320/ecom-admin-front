@@ -21,7 +21,7 @@ import { UserPermissions } from "../../../enums/permissions";
 import { IUser } from "../../../interfaces/user/user";
 import { usersRoutePath } from "../../../routes/config";
 import UserHttpService from "../../../services/http/user-http";
-import PersonalData from "../components/PersonalData";
+import MainInfo from "../components/MainInfo";
 export const Detail: React.FC = () => {
     const toast = useToast();
     const methods = useForm<IUser>({
@@ -104,12 +104,12 @@ export const Detail: React.FC = () => {
             <Box pr={"9"} pl={"9"}>
                 <Tabs>
                     <TabList>
-                        <Tab>Personal data</Tab>
+                        <Tab>Main Informations</Tab>
                     </TabList>
                     <FormProvider {...methods}>
                         <TabPanels>
                             <TabPanel>
-                                <PersonalData />
+                                <MainInfo />
                             </TabPanel>
                         </TabPanels>
                     </FormProvider>

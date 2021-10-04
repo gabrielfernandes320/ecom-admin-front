@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
-import ThemeToggler from "../../../../components/Theme/ThemeToggler";
+import ThemeToggler from "../../../../components/theme/ThemeToggler";
 
 interface Props {
     children: ReactNode;

@@ -1,36 +1,37 @@
-import { ReactNode } from "react";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
-    Box,
-    Flex,
     Avatar,
-    HStack,
-    Link,
-    IconButton,
+    Box,
     Button,
+    Flex,
+    HStack,
+    IconButton,
+    Link,
     Menu,
     MenuButton,
-    MenuList,
     MenuItem,
-    useDisclosure,
-    useColorModeValue,
+    MenuList,
     Stack,
+    useColorModeValue,
+    useDisclosure,
     VStack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { Link as ReactLink } from "react-router-dom";
-import ThemeToggler from "../../Theme/ThemeToggler";
-import { useAuth } from "../../../hooks/use-auth";
-import { HiHome } from "react-icons/hi";
+import { ReactNode } from "react";
 import { FaUser } from "react-icons/fa";
+import { FiBell } from "react-icons/fi";
+import { HiHome } from "react-icons/hi";
 import { ImLock } from "react-icons/im";
+import { Link as ReactLink } from "react-router-dom";
+import { RolePermissions, UserPermissions } from "../../../enums/permissions";
+import { useAuth } from "../../../hooks/use-auth";
 import {
     homeRoutePath,
+    productsRoutePath,
     rolesRoutePath,
     usersRoutePath,
 } from "../../../routes/config";
-import { FiBell } from "react-icons/fi";
-import { RolePermissions, UserPermissions } from "../../../enums/permissions";
 import PermissionsGate from "../../permissions/PermissionsGate";
+import ThemeToggler from "../../theme/ThemeToggler";
 
 const Links = [
     {
@@ -48,6 +49,12 @@ const Links = [
     {
         name: "Roles",
         to: rolesRoutePath,
+        icon: <ImLock />,
+        allowedPermissions: [RolePermissions.List, RolePermissions.Create],
+    },
+    {
+        name: "Products",
+        to: productsRoutePath,
         icon: <ImLock />,
         allowedPermissions: [RolePermissions.List, RolePermissions.Create],
     },

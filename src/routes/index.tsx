@@ -1,16 +1,17 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import NavBar from "../components/navigation/NavBar";
 import {
-    AuthRoutesComponent,
-    loginRoutePath,
-    HomeRoutesComponent,
-    homeRoutePath,
-    UsersRoutesComponent,
-    NotFoundRoutesComponent,
-    RolesRoutesComponent,
     accountRecoveryRoutePath,
+    AuthRoutesComponent,
     changePasswordRoutePath,
+    homeRoutePath,
+    HomeRoutesComponent,
+    loginRoutePath,
+    NotFoundRoutesComponent,
+    ProductsRoutesComponent,
+    RolesRoutesComponent,
+    UsersRoutesComponent,
 } from "./config";
 
 const AppRoutes: React.FC = () => (
@@ -26,6 +27,7 @@ const AppRoutes: React.FC = () => (
             <Route path={homeRoutePath} component={HomeRoutesComponent} />
             <UsersRoutesComponent />
             <RolesRoutesComponent />
+            <ProductsRoutesComponent />
         </NavBar>
         <Route component={NotFoundRoutesComponent} />
     </Switch>

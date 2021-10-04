@@ -1,28 +1,27 @@
 import { AddIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
-    IconButton,
     Button,
+    IconButton,
     Menu,
     MenuButton,
     MenuItem,
     MenuList,
-    useToast,
     Switch,
+    useToast,
 } from "@chakra-ui/react";
-import { useMutation, useQuery } from "react-query";
+import { AxiosResponse } from "axios";
+import { DateTime } from "luxon";
 import React from "react";
+import { useMutation, useQuery } from "react-query";
 import { Link, useHistory } from "react-router-dom";
 import { Column } from "react-table";
-import RoleHttpService from "../../../services/http/role-http";
-import { AxiosResponse } from "axios";
-import { IRole } from "../../../interfaces/role/role";
 import Table from "../../../components/data-display/Table";
-
 import TopInfoBar from "../../../components/navigation/TopInfoBar";
-import { rolesNewRoutePath, rolesRoutePath } from "../../../routes/config";
-import { DateTime } from "luxon";
 import PermissionsGate from "../../../components/permissions/PermissionsGate";
 import { RolePermissions } from "../../../enums/permissions";
+import { IRole } from "../../../interfaces/role/role";
+import { rolesNewRoutePath, rolesRoutePath } from "../../../routes/config";
+import RoleHttpService from "../../../services/http/role-http";
 
 export const List: React.FC = () => {
     const toast = useToast();

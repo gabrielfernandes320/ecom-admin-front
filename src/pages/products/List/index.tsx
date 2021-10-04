@@ -8,7 +8,6 @@ import {
     MenuItem,
     MenuList,
     Switch,
-    Tag,
     Text,
     useToast,
 } from "@chakra-ui/react";
@@ -21,30 +20,33 @@ import { Column } from "react-table";
 import Table from "../../../components/data-display/Table";
 import TopInfoBar from "../../../components/navigation/TopInfoBar";
 import PermissionsGate from "../../../components/permissions/PermissionsGate";
-import { UserPermissions } from "../../../enums/permissions";
-import { IRole } from "../../../interfaces/role/role";
-import { IUser } from "../../../interfaces/user/user";
-import { usersNewRoutePath, usersRoutePath } from "../../../routes/config";
-import UserHttpService from "../../../services/http/user-http";
+import { ProductPermissions } from "../../../enums/permissions";
+import { IProduct } from "../../../interfaces/product/product";
+import {
+    productsNewRoutePath,
+    productsRoutePath,
+} from "../../../routes/config";
+import { useProductHttpService } from "../../../services/http/product-http";
 
 export const List: React.FC = () => {
     const toast = useToast();
     const history = useHistory();
+    const { destroy, index, show, store, update } = useProductHttpService();
 
-    const { data: users, refetch } = useQuery(["users"], async () => {
-        const { data }: AxiosResponse = await UserHttpService.index();
+    const { data: products, refetch } = useQuery(["products"], async () => {
+        const { data }: AxiosResponse = await index();
 
         return data.value;
     });
 
     const destroyMutation = useMutation(
         async (id: number) => {
-            await UserHttpService.destroy(id);
+            await destroy(id);
         },
         {
             onError: (error: any) => {
                 toast({
-                    title: "Error at deleting the user.",
+                    title: "Error at deleting the product.",
                     status: "error",
                     duration: 2000,
                     isClosable: true,
@@ -52,7 +54,7 @@ export const List: React.FC = () => {
             },
             onSuccess: () => {
                 toast({
-                    title: "Sucess at deleting the user.",
+                    title: "Sucess at deleting the product.",
                     status: "success",
                     duration: 2000,
                     isClosable: true,
@@ -62,8 +64,8 @@ export const List: React.FC = () => {
     );
 
     const updateMutation = useMutation(
-        async (data: IUser) => {
-            await UserHttpService.update(data);
+        async (data: IProduct) => {
+            await update(data);
         },
         {
             onError: (error: any) => {
@@ -78,7 +80,7 @@ export const List: React.FC = () => {
             },
             onSuccess: () => {
                 toast({
-                    title: "Sucess at updating the user.",
+                    title: "Sucess at updating the product.",
                     status: "success",
                     duration: 2000,
                     isClosable: true,
@@ -87,7 +89,7 @@ export const List: React.FC = () => {
         }
     );
 
-    const memoData: IUser[] = React.useMemo(() => users, [users]);
+    const memoData: IProduct[] = React.useMemo(() => products, [products]);
 
     const columns: Column[] = React.useMemo(
         () => [
@@ -100,46 +102,31 @@ export const List: React.FC = () => {
                 accessor: "name",
             },
             {
-                Header: "Email",
-                accessor: "email",
+                Header: "Description",
+                accessor: "description",
+            },
+            {
+                Header: "Price",
+                accessor: "price",
             },
             {
                 Header: "Created At",
                 accessor: ({ createdAt }: any) =>
                     DateTime.fromISO(createdAt).toLocaleString(),
             },
-            {
-                Header: "Role",
-                accessor: "role",
-                Cell: (props: any) =>
-                    props.row.original.roles ? (
-                        props.row.original.roles?.map((role: IRole) => (
-                            <Tag
-                                mr={"2.5"}
-                                size={"lg"}
-                                key={role.id}
-                                variant="solid"
-                                colorScheme="blue"
-                            >
-                                {role.name}
-                            </Tag>
-                        ))
-                    ) : (
-                        <> </>
-                    ),
-            },
+
             {
                 Header: "Enabled",
                 accessor: "enabled",
                 Cell: (props: any) => (
                     <PermissionsGate
-                        allowedPermissions={[UserPermissions.Update]}
+                        allowedPermissions={[ProductPermissions.Update]}
                         noAccessProps={{ isDisabled: true }}
                     >
                         <Switch
                             size={"lg"}
                             onChange={async () => {
-                                const data: IUser = props.row.original;
+                                const data: IProduct = props.row.original;
                                 data.enabled = !data.enabled;
                                 await updateMutation.mutateAsync(data);
                                 await refetch();
@@ -157,8 +144,8 @@ export const List: React.FC = () => {
                     <Menu>
                         <PermissionsGate
                             allowedPermissions={[
-                                UserPermissions.Delete,
-                                UserPermissions.Update,
+                                ProductPermissions.Delete,
+                                ProductPermissions.Update,
                             ]}
                             noAccessProps={{ disabled: true }}
                         >
@@ -171,18 +158,18 @@ export const List: React.FC = () => {
 
                         <MenuList>
                             <PermissionsGate
-                                allowedPermissions={[UserPermissions.Update]}
+                                allowedPermissions={[ProductPermissions.Update]}
                             >
                                 <MenuItem
                                     as={Link}
-                                    to={`${usersRoutePath}/${props.row.original.id}/edit`}
+                                    to={`${productsRoutePath}/${props.row.original.id}/edit`}
                                 >
                                     Edit
                                 </MenuItem>
                             </PermissionsGate>
 
                             <PermissionsGate
-                                allowedPermissions={[UserPermissions.Delete]}
+                                allowedPermissions={[ProductPermissions.Delete]}
                             >
                                 <MenuItem
                                     onClick={async () => {
@@ -206,18 +193,18 @@ export const List: React.FC = () => {
     return (
         <>
             <TopInfoBar
-                title={"Users"}
-                subtitle={"All your users in one place."}
+                title={"Products"}
+                subtitle={"All your products in one place."}
                 Buttons={[
                     <PermissionsGate
-                        allowedPermissions={[UserPermissions.Create]}
+                        allowedPermissions={[ProductPermissions.Create]}
                     >
                         <Button
-                            onClick={() => history.push(usersNewRoutePath)}
+                            onClick={() => history.push(productsNewRoutePath)}
                             leftIcon={<AddIcon />}
                             alignContent={"flex-end"}
                         >
-                            New User
+                            New Product
                         </Button>
                     </PermissionsGate>,
                 ]}
@@ -230,7 +217,7 @@ export const List: React.FC = () => {
                         </Text>
                     </Center>
                 }
-                allowedPermissions={[UserPermissions.List]}
+                allowedPermissions={[ProductPermissions.List]}
             >
                 <Table columns={columns} data={memoData ?? []} />
             </PermissionsGate>

@@ -1,28 +1,30 @@
 import { ILogin } from "../../interfaces/auth/login";
-import Request from "./request";
+import useRequest from "./request";
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+const { del, get, patch, post } = useRequest({});
 export default class AuthHttpService {
     public static uri = "/v1/auth";
 
     public static login(login: ILogin) {
-        return Request.post(`${this.uri}/login`, login);
+        return post(`${this.uri}/login`, login);
     }
 
     public static accountRecovery(email: string) {
-        return Request.post(`${this.uri}/password/forgot`, {
+        return post(`${this.uri}/password/forgot`, {
             email,
         });
     }
 
     public static resetPassword(data: Object) {
-        return Request.post(`${this.uri}/password/reset`, data);
+        return post(`${this.uri}/password/reset`, data);
     }
 
     public static getAuthenticatedUser() {
-        return Request.get(`${this.uri}/user`);
+        return get(`${this.uri}/user`);
     }
 
     public static logout() {
-        return Request.post(`${this.uri}/logout`);
+        return post(`${this.uri}/logout`);
     }
 }
